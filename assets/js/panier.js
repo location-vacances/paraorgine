@@ -32,7 +32,7 @@ function renderCart() {
   }
 
   const subtotal = cart.reduce((s,i) => s + i.price * (i.qty||1), 0);
-  const shipping = subtotal >= 49 ? 0 : 4.90;
+  const shipping = 0; // Livraison gratuite pour toutes les commandes
   const total = subtotal + shipping;
 
         el.innerHTML = `
@@ -87,11 +87,8 @@ function renderCart() {
               <div class="summary-line"><span>Sous-total</span><span>€${subtotal.toFixed(2).replace('.',',')}</span></div>
               <div class="summary-line">
                 <span>Livraison</span>
-                <span>${shipping === 0 ? '<span style="color:#1a5c3a;font-weight:600;">Gratuite ✓</span>' : '€' + shipping.toFixed(2).replace('.',',')}</span>
+                <span><span style="color:#1a5c3a;font-weight:600;">Gratuite ✓</span></span>
               </div>
-              ${shipping > 0 ? `<div style="background:var(--cream);border-radius:var(--radius);padding:10px 12px;margin:8px 0;font-size:0.8rem;color:var(--text-mid);">
-                ℹ️ Plus que <strong>€${(49 - subtotal).toFixed(2).replace('.',',')}</strong> pour la livraison gratuite
-              </div>` : ''}
               <div class="summary-total"><span>Total</span><span>€${total.toFixed(2).replace('.',',')}</span></div>
               <button class="btn btn-primary" style="width:100%;margin-top:1.2rem;justify-content:center;" onclick="checkout()">
                 🔒 Commander (€${total.toFixed(2).replace('.',',')})
@@ -137,7 +134,7 @@ async function checkout() {
 
   const cart = getCart();
   const subtotal = cart.reduce((s,i) => s + i.price * (i.qty||1), 0);
-  const shipping = subtotal >= 49 ? 0 : 4.90;
+  const shipping = 0; // Livraison gratuite pour toutes les commandes
   const total = subtotal + shipping;
 
   const order = {
