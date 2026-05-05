@@ -12,8 +12,7 @@
     "subtotal": 15.99,
     "shipping": 4.9,
     "total": 20.89,
-    "timestamp": "2026-05-05T11:18:38.622Z",
-    "status": "pending"
+    "timestamp": "2026-05-05T11:18:38.622Z"
   },
   {
     "id": 1777980585887,
@@ -61,7 +60,8 @@
     "subtotal": 105.48,
     "shipping": 0,
     "total": 105.48,
-    "timestamp": "2026-05-05T11:32:54.138Z"
+    "timestamp": "2026-05-05T11:32:54.138Z",
+    "status": "completed"
   },
   {
     "id": 1777981128585,
@@ -82,7 +82,8 @@
     "subtotal": 15.99,
     "shipping": 0,
     "total": 15.99,
-    "timestamp": "2026-05-05T11:38:48.585Z"
+    "timestamp": "2026-05-05T11:38:48.585Z",
+    "status": "completed"
   },
   {
     "id": 1777987109965,
@@ -115,6 +116,7 @@
     "subtotal": 365,
     "shipping": 0,
     "total": 365,
-    "timestamp": "2026-05-05T13:18:29.965Z"
+    "timestamp": "2026-05-05T13:18:29.965Z",
+    "status": "completed"
   }
 ]
