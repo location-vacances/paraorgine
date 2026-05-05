@@ -118,5 +118,26 @@
     "total": 365,
     "timestamp": "2026-05-05T13:18:29.965Z",
     "status": "completed"
+  },
+  {
+    "id": 1777994387855,
+    "customer": {
+      "fullname": "Hayfa Fuentes",
+      "phone": "+1 (888) 519-2695",
+      "email": "denitepiv@mailinator.com",
+      "address": "Placeat eligendi au"
+    },
+    "items": [
+      {
+        "id": 1,
+        "title": "Crème Hydratante Premium",
+        "price": 15.99,
+        "qty": 2
+      }
+    ],
+    "subtotal": 31.98,
+    "shipping": 0,
+    "total": 31.98,
+    "timestamp": "2026-05-05T15:19:47.855Z"
   }
 ]
