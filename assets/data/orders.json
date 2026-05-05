@@ -4,7 +4,7 @@
     "items": [
       {
         "id": 1,
-        "title": "CrÃƒÂ¨me Hydratante Premium",
+        "title": "CrÃƒÆ’Ã‚Â¨me Hydratante Premium",
         "price": 15.99,
         "qty": 1
       }
@@ -19,7 +19,7 @@
     "items": [
       {
         "id": 1,
-        "title": "CrÃ¨me Hydratante Premium",
+        "title": "CrÃƒÂ¨me Hydratante Premium",
         "price": 15.99,
         "qty": 1
       }
@@ -40,7 +40,7 @@
     "items": [
       {
         "id": 1,
-        "title": "Crème Hydratante Premium",
+        "title": "CrÃ¨me Hydratante Premium",
         "price": 15.99,
         "qty": 2
       },
@@ -73,7 +73,7 @@
     "items": [
       {
         "id": 1,
-        "title": "Cr�me Hydratante Premium",
+        "title": "Crème Hydratante Premium",
         "price": 15.99,
         "qty": 1
       }
@@ -82,5 +82,38 @@
     "shipping": 0,
     "total": 15.99,
     "timestamp": "2026-05-05T11:38:48.585Z"
+  },
+  {
+    "id": 1777987109965,
+    "customer": {
+      "fullname": "ff",
+      "phone": "3333333",
+      "email": "marouane@gmail.com",
+      "address": "R�sidence Rif app B3 imouzzer kandar\nR�sidence Rif app B4 imouzzer kandar"
+    },
+    "items": [
+      {
+        "id": 1,
+        "title": "Cr�me Hydratante Premium",
+        "price": 160,
+        "qty": 1
+      },
+      {
+        "id": 2,
+        "title": "Shampooing Naturel Bio",
+        "price": 85,
+        "qty": 1
+      },
+      {
+        "id": 3,
+        "title": "Vitamine C 1000mg",
+        "price": 120,
+        "qty": 1
+      }
+    ],
+    "subtotal": 365,
+    "shipping": 0,
+    "total": 365,
+    "timestamp": "2026-05-05T13:18:29.965Z"
   }
 ]
