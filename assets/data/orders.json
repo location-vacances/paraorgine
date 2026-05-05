@@ -4,7 +4,7 @@
     "items": [
       {
         "id": 1,
-        "title": "Crème Hydratante Premium",
+        "title": "CrÃ¨me Hydratante Premium",
         "price": 15.99,
         "qty": 1
       }
@@ -13,5 +13,20 @@
     "shipping": 4.9,
     "total": 20.89,
     "timestamp": "2026-05-05T11:18:38.622Z"
+  },
+  {
+    "id": 1777980585887,
+    "items": [
+      {
+        "id": 1,
+        "title": "Crème Hydratante Premium",
+        "price": 15.99,
+        "qty": 1
+      }
+    ],
+    "subtotal": 15.99,
+    "shipping": 4.9,
+    "total": 20.89,
+    "timestamp": "2026-05-05T11:29:45.887Z"
   }
 ]
