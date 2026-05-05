@@ -112,55 +112,7 @@
             <h2>Produits vedettes</h2>
           </div>
         </div>
-        <div class="products-grid">
-          <div class="product-card fade-up">
-            <div class="product-image-placeholder">🌸</div>
-            <span class="product-badge new">Nouveau</span>
-            <button class="product-wish">♡</button>
-            <div class="product-body">
-              <div class="product-category">Soins de la peau</div>
-              <div class="product-stars">★★★★★ <span style="color:var(--text-light);font-size:0.75rem;">(48)</span></div>
-              <div class="product-title">Crème Hydratante Premium</div>
-              <div class="product-desc">Formule enrichie à l'acide hyaluronique pour une peau douce et repulpée.</div>
-              <div class="product-footer">
-                <div>
-                  <span class="product-price">€15,99</span>
-                  <span class="product-price-old">€19,99</span>
-                </div>
-                <button class="add-cart-btn" onclick="addToCart({id:1, title:'Crème Hydratante Premium', price:15.99})">+</button>
-              </div>
-            </div>
-          </div>
-          <div class="product-card fade-up fade-up-1">
-            <div class="product-image-placeholder">🌿</div>
-            <button class="product-wish">♡</button>
-            <div class="product-body">
-              <div class="product-category">Hygiène capillaire</div>
-              <div class="product-stars">★★★★☆ <span style="color:var(--text-light);font-size:0.75rem;">(32)</span></div>
-              <div class="product-title">Shampooing Naturel Bio</div>
-              <div class="product-desc">Nettoyant doux aux extraits de plantes pour tous types de cheveux.</div>
-              <div class="product-footer">
-                <span class="product-price">€8,50</span>
-                <button class="add-cart-btn" onclick="addToCart({id:2, title:'Shampooing Naturel Bio', price:8.50})">+</button>
-              </div>
-            </div>
-          </div>
-          <div class="product-card fade-up fade-up-2">
-            <div class="product-image-placeholder">💊</div>
-            <span class="product-badge">Bestseller</span>
-            <button class="product-wish">♡</button>
-            <div class="product-body">
-              <div class="product-category">Compléments alimentaires</div>
-              <div class="product-stars">★★★★★ <span style="color:var(--text-light);font-size:0.75rem;">(87)</span></div>
-              <div class="product-title">Vitamine C 1000mg</div>
-              <div class="product-desc">Complément haute dose pour renforcer l'immunité et la vitalité.</div>
-              <div class="product-footer">
-                <span class="product-price">€12,00</span>
-                <button class="add-cart-btn" onclick="addToCart({id:3, title:'Vitamine C 1000mg', price:12.00})">+</button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="products-grid" id="featured-products"></div>
 
         <!-- CTA -->
         <div style="margin-top:2.5rem;background:linear-gradient(135deg,var(--plum),var(--plum-light));border-radius:var(--radius-lg);padding:2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;">
@@ -177,5 +129,6 @@
 
   <div id="footer"></div>
   <script src="assets/js/common.js"></script>
+  <script src="assets/js/index.js"></script>
 </body>
 </html>
