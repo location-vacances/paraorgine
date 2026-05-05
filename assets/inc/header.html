@@ -1,0 +1,31 @@
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo-area" style="text-decoration:none;">
+      <div class="logo-icon">🌿</div>
+      <div>
+        <div class="logo-text">Origine</div>
+        <span class="logo-sub">Parapharmacie</span>
+      </div>
+      <!-- <img src="./assets/imgs/logo.png" alt="Parapharmacie Origine" class="h-12"> -->
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html" id="nav-home">🏠 Accueil</a></li>
+        <li><a href="boutique.html" id="nav-boutique">🛍 Boutique</a></li>
+        <li><a href="contact.html" id="nav-contact">✉️ Contact</a></li>
+        <li><a href="panier.html" class="cart-link" id="nav-panier">🛒 Panier <span id="cart-count" style="display:none;background:var(--rose);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:0.7rem;margin-left:2px;">0</span></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<script>
+  // Highlight active nav
+  const page = location.pathname.split('/').pop() || 'index.html';
+  const map = { 'index.html': 'nav-home', 'boutique.html': 'nav-boutique', 'contact.html': 'nav-contact', 'panier.html': 'nav-panier' };
+  if(map[page]) document.getElementById(map[page])?.classList.add('active');
+  // Cart count
+  const cart = JSON.parse(localStorage.getItem('panier') || '[]');
+  const count = cart.reduce((s,i)=>s+(i.qty||1),0);
+  const el = document.getElementById('cart-count');
+  if(el && count > 0) { el.style.display='inline-flex'; el.textContent=count; }
+</script>

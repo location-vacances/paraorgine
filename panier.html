@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panier - Parapharmacie Origine</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="shortcut icon" href="assets/imgs/logo.png" type="image/x-icon">
+</head>
+<body>
+  <div id="header"></div>
+  <main>
+    <div class="page-wrapper">
+      <div id="sidebar"></div>
+      <div>
+        <div class="breadcrumb">
+          <a href="index.html">Accueil</a>
+          <span>›</span>
+          <span>Mon Panier</span>
+        </div>
+        <div class="section-label">
+          <div>
+            <span class="section-label-sm">Ma commande</span>
+            <h1 style="font-size:2.2rem;">Mon Panier</h1>
+          </div>
+        </div>
+        <div id="cart-content"></div>
+      </div>
+    </div>
+  </main>
+  <div id="footer"></div>
+
+   <script src="assets/js/common.js"></script>
+   <script>
+     let products = {};
+
+     fetch('assets/data/products.json')
+       .then(response => response.json())
+       .then(data => {
+         products = data.reduce((acc, p) => { acc[p.id] = p; return acc; }, {});
+         renderCart();
+       })
+       .catch(error => console.error('Error loading products:', error));
+
+     function renderCart() {
+       const cart = getCart();
+       const el = document.getElementById('cart-content');
+
+       if (!cart.length) {
+         el.innerHTML = `
+           <div class="card empty-cart">
+             <div class="empty-icon">🛒</div>
+             <h2 style="color:var(--plum);margin-bottom:0.5rem;font-size:1.8rem;">Votre panier est vide</h2>
+             <p style="color:var(--text-light);margin-bottom:1.5rem;">Découvrez nos produits et commencez vos achats.</p>
+             <a href="boutique.html" class="btn btn-primary">Découvrir la boutique →</a>
+           </div>`;
+         return;
+       }
+
+       const subtotal = cart.reduce((s,i) => s + i.price * (i.qty||1), 0);
+       const shipping = subtotal >= 49 ? 0 : 4.90;
+       const total = subtotal + shipping;
+
+       el.innerHTML = `
+         <div style="display:grid;grid-template-columns:1fr 320px;gap:2rem;align-items:start;">
+           <div class="card">
+             <div id="cart-items">
+               ${cart.map(item => `
+                 <div class="cart-row" id="row-${item.id}">
+                   <img src="${products[item.id]?.image || '📦'}" alt="${item.title}" class="cart-img">
+                   <div>
+                     <div class="cart-product-name">${item.title}</div>
+                     <div class="cart-product-cat">€${item.price.toFixed(2).replace('.',',')} / unité</div>
+                   </div>
+                   <div class="qty-selector" style="transform:scale(0.9);">
+                     <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
+                     <span class="qty-value">${item.qty||1}</span>
+                     <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
+                   </div>
+                   <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--plum);white-space:nowrap;">
+                     €${(item.price * (item.qty||1)).toFixed(2).replace('.',',')}
+                   </div>
+                   <button class="cart-remove" onclick="removeItem(${item.id})">✕</button>
+                 </div>
+               `).join('')}
+             </div>
+             <div style="display:flex;justify-content:space-between;align-items:center;padding-top:1rem;margin-top:0.5rem;">
+               <a href="boutique.html" class="btn btn-outline btn-sm">← Continuer les achats</a>
+               <button onclick="clearCart()" style="background:none;border:none;color:var(--text-light);font-size:0.8rem;cursor:pointer;text-decoration:underline;">Vider le panier</button>
+             </div>
+           </div>
+           <div class="cart-summary">
+             <h3 style="color:var(--plum);margin-bottom:1.2rem;">Récapitulatif</h3>
+             <div class="summary-line"><span>Sous-total</span><span>€${subtotal.toFixed(2).replace('.',',')}</span></div>
+             <div class="summary-line">
+               <span>Livraison</span>
+               <span>${shipping === 0 ? '<span style="color:#1a5c3a;font-weight:600;">Gratuite ✓</span>' : '€' + shipping.toFixed(2).replace('.',',')}</span>
+             </div>
+             ${shipping > 0 ? `<div style="background:var(--cream);border-radius:var(--radius);padding:10px 12px;margin:8px 0;font-size:0.8rem;color:var(--text-mid);">
+               ℹ️ Plus que <strong>€${(49 - subtotal).toFixed(2).replace('.',',')}</strong> pour la livraison gratuite
+             </div>` : ''}
+             <div style="padding:8px 0;">
+               <div style="display:flex;gap:8px;">
+                 <input type="text" placeholder="Code promo" class="form-input" style="flex:1;padding:10px 14px;">
+                 <button class="btn btn-outline btn-sm" onclick="showToast('Code ORIGINE15 appliqué ✓','success')">OK</button>
+               </div>
+             </div>
+             <div class="summary-total"><span>Total</span><span>€${total.toFixed(2).replace('.',',')}</span></div>
+             <button class="btn btn-primary" style="width:100%;margin-top:1.2rem;justify-content:center;" onclick="checkout()">
+               🔒 Commander (€${total.toFixed(2).replace('.',',')})
+             </button>
+             <div style="text-align:center;margin-top:0.8rem;">
+               <span style="font-size:0.75rem;color:var(--text-light);">💳 CB · Visa · PayPal · Virement</span>
+             </div>
+           </div>
+         </div>`;
+      }
+
+    function changeQty(id, delta) {
+      const cart = getCart();
+      const idx = cart.findIndex(i => i.id === id);
+      if (idx === -1) return;
+      cart[idx].qty = Math.max(1, (cart[idx].qty||1) + delta);
+      saveCart(cart);
+      renderCart();
+    }
+
+    function removeItem(id) {
+      const cart = getCart().filter(i => i.id !== id);
+      saveCart(cart);
+      renderCart();
+      showToast('Produit retiré du panier');
+    }
+
+    function clearCart() {
+      if (confirm('Vider tout le panier ?')) { saveCart([]); renderCart(); }
+    }
+
+     function checkout() {
+       showToast('✅ Commande envoyée ! Merci pour votre achat.', 'success');
+       saveCart([]);
+       setTimeout(() => renderCart(), 1000);
+     }
+  </script>
+</body>
+</html>

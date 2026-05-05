@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produit - Parapharmacie Origine</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="shortcut icon" href="assets/imgs/logo.png" type="image/x-icon">
+</head>
+<body>
+  <div id="header"></div>
+  <main>
+    <div class="page-wrapper">
+      <div id="sidebar"></div>
+      <div id="product-container">
+        <div class="breadcrumb">
+          <a href="index.html">Accueil</a>
+          <span>›</span>
+          <a href="boutique.html">Boutique</a>
+          <span>›</span>
+          <span id="breadcrumb-title">Produit</span>
+        </div>
+        <!-- Product content injected by JS -->
+        <div id="product-detail"></div>
+
+        <!-- Related products -->
+        <div style="margin-top:3rem;">
+          <div class="section-label">
+            <div>
+              <span class="section-label-sm">Vous aimerez aussi</span>
+              <h2>Produits similaires</h2>
+            </div>
+          </div>
+          <div class="products-grid" id="related-products"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <div id="footer"></div>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/product.js"></script>
+</body>
+</html>

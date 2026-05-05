@@ -1,163 +1,181 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Pharmacie Rayan</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accueil - Parapharmacie Origine</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="shortcut icon" href="assets/imgs/logo.png" type="image/x-icon">
 </head>
-
 <body>
+  <div id="header"></div>
 
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-badge">✦ Santé · Nature · Bien-être</span>
+      <h1 class="fade-up">Prenez soin de vous,<br><em>naturellement.</em></h1>
+      <p class="fade-up fade-up-1">Découvrez notre sélection de produits parapharmaceutiques sélectionnés avec soin, pour toute la famille.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;" class="fade-up fade-up-2">
+        <a href="boutique.html" class="btn btn-gold">Découvrir la boutique →</a>
+        <a href="contact.html" class="btn" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);">Nous contacter</a>
+      </div>
+    </div>
+  </section>
 
-    <header>
-        <nav class="navbar">
-            <div class="logo">Para <span>Pharmacie Rayan</span></div>
-            <ul class="nav-links">
-                <li><a href="#">Accueil</a></li>
-                <li><a href="#">Produits</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-
-        <main class="hero">
-            <h1>Bienvenue chez Para Rayan</h1>
-            <p>Votre santé, notre priorité.</p>
-            <button class="btn-main">Voir nos offres</button>
-        </main>
-    </header>
-
-
-    <main class="container-produits">
-        <h2 class="titre-section">Nos Produits Exclusifs</h2>
-        <div class="grille-produits">
-
-            <div class="carte-produit">
-                <img src="images/p13.jpeg" alt="Produit 13">
-                <h3>Produit 13</h3>
-                <p class="prix">
-                    <del class="prix-ancien">125.00 DH</del><br>
-                    <span class="prix-nouveau">118.00 DH</span>
-                </p>
-
-                <a href="https://wa.me/212625802020?text=Bonjour, je souhaite commander le Produit 13" target="_blank">
-                    <button class="btn-ajouter">Commander</button>
-                </a>
-            </div>
-
-            <div class="carte-produit">
-                <img src="images/p6.jpeg" alt="Produit 6">
-                <h3>Produit 6</h3>
-                <p class="prix">
-                    <del class="prix-ancien">223.00 DH</del><br>
-                    <span class="prix-nouveau">193.00 DH</span>
-                </p>
-
-                <a href="https://wa.me/212625802020?text=Bonjour, je souhaite commander le Produit 6" target="_blank">
-                    <button class="btn-ajouter">Commander</button>
-                </a>
-            </div>
-
-            <div class="carte-produit">
-                <img src="images/p7.jpeg" alt="Produit 7">
-                <h3>Produit 7</h3>
-                <p class="prix">
-                    <del class="prix-ancien">190.00 DH</del><br>
-                    <span class="prix-nouveau">160.00 DH</span>
-                </p>
-
-                <a href="https://wa.me/212625802020?text=Bonjour, je souhaite commander le Produit 7" target="_blank">
-                    <button class="btn-ajouter">Commander</button>
-                </a>
-                </a>
-            </div>
-
-            <div class="carte-produit">
-                <img src="images/p4.jpeg" alt="Produit 4">
-                <h3>Produit 4</h3>
-                <p class="prix">
-                    <del class="prix-ancien">152.00 DH</del><br>
-                    <span class="prix-nouveau">133.00 DH</span>
-                </p>
-
-                <a href="https://wa.me/212625802020?text=Bonjour, je souhaite commander le Produit 5" target="_blank">
-                    <button class="btn-ajouter">Commander</button>
-                </a>
-                </a>
-                </a>
-            </div>
-
-            <div class="carte-produit">
-                <img src="images/p9.jpeg" alt="Produit 9">
-                <h3>Produit 9</h3>
-                <p class="prix">
-                    <span class="prix-nouveau">190.00 DH</span>
-                </p>
-
-                <a href="https://wa.me/212625802020?text=Bonjour, je souhaite commander le Produit 9" target="_blank">
-                    <button class="btn-ajouter">Commander</button>
-                </a>
-
-            </div>
-
-            <div class="carte-produit">
-                <img src="images/p10.jpeg" alt="Produit 10">
-                <h3>Produit 10</h3>
-                <p class="prix">
-                    <span class="prix-nouveau">125.00 DH</span>
-                </p>
-
-                <a href="https://wa.me/212625802020?text=Bonjour, je souhaite commander le Produit 10" target="_blank">
-                    <button class="btn-ajouter">Commander</button>
-                </a>
-
-            </div>
-
-            <div class="carte-produit">
-                <img src="images/p11.jpeg" alt="Produit 11">
-                <h3>Produit 11</h3>
-                <p class="prix">
-                    <del class="prix-ancien">277.00 DH</del><br>
-                    <span class="prix-nouveau">250.00 DH</span>
-                </p>
-
-                <a href="https://wa.me/212625802020?text=Bonjour, je souhaite commander le Produit 11" target="_blank">
-                    <button class="btn-ajouter">Commander</button>
-                </a>
-
-            </div>
-
-            <div class="carte-produit">
-                <img src="images/p12.jpeg" alt="Produit 12">
-                <h3>Produit 12</h3>
-                <p class="prix">
-                    <del class="prix-ancien">180.00 DH</del><br>
-                    <span class="prix-nouveau">155.00 DH</span>
-                </p>
-
-                <a href="https://wa.me/212625802020?text=Bonjour, je souhaite commander le Produit 12" target="_blank">
-                    <button class="btn-ajouter">Commander</button>
-                </a>
-
-            </div>
-
-            <div class="carte-produit">
-                <img src="images/p13.jpeg" alt="Produit 13">
-                <h3>Produit 13</h3>
-                <p class="prix">
-                    <del class="prix-ancien">125.00 DH</del><br>
-                    <span class="prix-nouveau">118.00 DH</span>
-                </p>
-
-                <a href="https://wa.me/212625802020?text=Bonjour, je souhaite commander le Produit 13" target="_blank">
-                    <button class="btn-ajouter">Commander</button>
-                </a>
-
-            </div>
+  <!-- Trust Bar -->
+  <div class="trust-bar">
+    <div class="trust-items">
+      <div class="trust-item">
+        <div class="trust-icon">🚚</div>
+        <div class="trust-text">
+          <strong>Livraison rapide</strong>
+          <span>Sous 24–48h en France</span>
         </div>
-    </main>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🔒</div>
+        <div class="trust-text">
+          <strong>Paiement sécurisé</strong>
+          <span>SSL & 3D Secure</span>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🌿</div>
+        <div class="trust-text">
+          <strong>100% Naturel</strong>
+          <span>Ingrédients certifiés</span>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">↩️</div>
+        <div class="trust-text">
+          <strong>Retours gratuits</strong>
+          <span>Sous 30 jours</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <main>
+    <div class="page-wrapper">
+      <div id="sidebar"></div>
+      <div>
+        <!-- Categories -->
+        <div class="section-label">
+          <div>
+            <span class="section-label-sm">Explorer par</span>
+            <h2>Nos catégories</h2>
+          </div>
+        </div>
+        <div class="category-grid">
+          <a href="boutique.html?cat=peau" class="category-tile featured">
+            <span class="icon">🌸</span>
+            <h3>Soins de la peau</h3>
+            <p>Hydratation, soin & éclat</p>
+          </a>
+          <a href="boutique.html?cat=hygiene" class="category-tile">
+            <span class="icon">🧴</span>
+            <h3>Hygiène</h3>
+            <p>Pour toute la famille</p>
+          </a>
+          <a href="boutique.html?cat=complements" class="category-tile">
+            <span class="icon">💊</span>
+            <h3>Compléments</h3>
+            <p>Vitamines & minéraux</p>
+          </a>
+          <a href="boutique.html?cat=maternite" class="category-tile">
+            <span class="icon">👶</span>
+            <h3>Maternité</h3>
+            <p>Maman & bébé</p>
+          </a>
+          <a href="boutique.html?cat=bienetre" class="category-tile">
+            <span class="icon">🧘</span>
+            <h3>Bien-être</h3>
+            <p>Relaxation & sommeil</p>
+          </a>
+          <a href="boutique.html?cat=solaire" class="category-tile">
+            <span class="icon">☀️</span>
+            <h3>Solaire</h3>
+            <p>Protection & après-soleil</p>
+          </a>
+        </div>
+
+        <!-- Featured Products -->
+        <div class="section-label" style="margin-top:2.5rem;">
+          <div>
+            <span class="section-label-sm">Sélection du moment</span>
+            <h2>Produits vedettes</h2>
+          </div>
+        </div>
+        <div class="products-grid">
+          <div class="product-card fade-up">
+            <div class="product-image-placeholder">🌸</div>
+            <span class="product-badge new">Nouveau</span>
+            <button class="product-wish">♡</button>
+            <div class="product-body">
+              <div class="product-category">Soins de la peau</div>
+              <div class="product-stars">★★★★★ <span style="color:var(--text-light);font-size:0.75rem;">(48)</span></div>
+              <div class="product-title">Crème Hydratante Premium</div>
+              <div class="product-desc">Formule enrichie à l'acide hyaluronique pour une peau douce et repulpée.</div>
+              <div class="product-footer">
+                <div>
+                  <span class="product-price">€15,99</span>
+                  <span class="product-price-old">€19,99</span>
+                </div>
+                <button class="add-cart-btn" onclick="addToCart({id:1, title:'Crème Hydratante Premium', price:15.99})">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card fade-up fade-up-1">
+            <div class="product-image-placeholder">🌿</div>
+            <button class="product-wish">♡</button>
+            <div class="product-body">
+              <div class="product-category">Hygiène capillaire</div>
+              <div class="product-stars">★★★★☆ <span style="color:var(--text-light);font-size:0.75rem;">(32)</span></div>
+              <div class="product-title">Shampooing Naturel Bio</div>
+              <div class="product-desc">Nettoyant doux aux extraits de plantes pour tous types de cheveux.</div>
+              <div class="product-footer">
+                <span class="product-price">€8,50</span>
+                <button class="add-cart-btn" onclick="addToCart({id:2, title:'Shampooing Naturel Bio', price:8.50})">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card fade-up fade-up-2">
+            <div class="product-image-placeholder">💊</div>
+            <span class="product-badge">Bestseller</span>
+            <button class="product-wish">♡</button>
+            <div class="product-body">
+              <div class="product-category">Compléments alimentaires</div>
+              <div class="product-stars">★★★★★ <span style="color:var(--text-light);font-size:0.75rem;">(87)</span></div>
+              <div class="product-title">Vitamine C 1000mg</div>
+              <div class="product-desc">Complément haute dose pour renforcer l'immunité et la vitalité.</div>
+              <div class="product-footer">
+                <span class="product-price">€12,00</span>
+                <button class="add-cart-btn" onclick="addToCart({id:3, title:'Vitamine C 1000mg', price:12.00})">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div style="margin-top:2.5rem;background:linear-gradient(135deg,var(--plum),var(--plum-light));border-radius:var(--radius-lg);padding:2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;">
+          <div>
+            <span style="color:var(--gold-light);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.14em;font-weight:600;">Offre limitée</span>
+            <h2 style="color:#fff;margin-top:0.3rem;">Votre première commande<br>à <em>-15%</em></h2>
+            <p style="color:rgba(255,255,255,0.7);margin-top:0.5rem;font-size:0.9rem;">Avec le code <strong style="color:var(--gold-light);">ORIGINE15</strong> · Valable jusqu'au 31 mai</p>
+          </div>
+          <a href="boutique.html" class="btn btn-gold" style="white-space:nowrap;">Profiter de l'offre →</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+  <script src="assets/js/common.js"></script>
 </body>
-
 </html>

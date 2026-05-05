@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boutique - Parapharmacie Origine</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="shortcut icon" href="assets/imgs/logo.png" type="image/x-icon">
+</head>
+<body>
+  <div id="header"></div>
+  <main>
+    <div class="page-wrapper">
+      <div id="sidebar"></div>
+      <div>
+        <div class="breadcrumb">
+          <a href="index.html">Accueil</a>
+          <span>›</span>
+          <span>Boutique</span>
+        </div>
+
+        <div class="section-label">
+          <div>
+            <span class="section-label-sm">Tous nos produits</span>
+            <h1 style="font-size:2.2rem;">Notre Boutique</h1>
+          </div>
+        </div>
+
+        <!-- Search -->
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="search-input" id="search-input" placeholder="Rechercher un produit…">
+        </div>
+
+        <!-- Filters -->
+        <div class="filter-bar" id="filter-bar">
+          <button class="filter-chip active" data-filter="all">Tous</button>
+          <button class="filter-chip" data-filter="peau">Soins peau</button>
+          <button class="filter-chip" data-filter="hygiene">Hygiène</button>
+          <button class="filter-chip" data-filter="complements">Compléments</button>
+          <button class="filter-chip" data-filter="bienetre">Bien-être</button>
+          <button class="filter-chip" data-filter="maternite">Maternité</button>
+        </div>
+
+        <!-- Sort bar -->
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+          <p style="font-size:0.85rem;color:var(--text-light);" id="results-count">12 produits</p>
+          <select style="padding:8px 14px;border:1.5px solid var(--cream-dark);border-radius:var(--radius-pill);font-size:0.85rem;font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text-dark);outline:none;cursor:pointer;" id="sort-select">
+            <option value="default">Trier par défaut</option>
+            <option value="price-asc">Prix croissant</option>
+            <option value="price-desc">Prix décroissant</option>
+            <option value="name">Nom A-Z</option>
+          </select>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid" id="products-grid"></div>
+      </div>
+    </div>
+  </main>
+  <div id="footer"></div>
+
+  <script src="assets/js/common.js"></script>
+  <script>
+    let allProducts = [];
+    let currentFilter = 'all';
+    let currentSearch = '';
+    let currentSort = 'default';
+
+    fetch('assets/data/products.json')
+      .then(response => response.json())
+      .then(data => {
+        allProducts = data;
+
+        // Check URL param
+        const urlCat = new URLSearchParams(location.search).get('cat');
+        if (urlCat) {
+          currentFilter = urlCat;
+          document.querySelectorAll('.filter-chip').forEach(b => {
+            b.classList.toggle('active', b.dataset.filter === urlCat);
+          });
+        }
+
+        renderProducts();
+      })
+      .catch(error => console.error('Error loading products:', error));
+
+    function starStr(n) {
+      return '★'.repeat(n) + '☆'.repeat(5-n);
+    }
+
+    function renderProducts() {
+      let filtered = allProducts.filter(p => {
+        const matchCat = currentFilter === 'all' || p.cat === currentFilter;
+        const matchSearch = p.title.toLowerCase().includes(currentSearch.toLowerCase()) || p.desc.toLowerCase().includes(currentSearch.toLowerCase());
+        return matchCat && matchSearch;
+      });
+      if (currentSort === 'price-asc') filtered.sort((a,b) => a.price - b.price);
+      else if (currentSort === 'price-desc') filtered.sort((a,b) => b.price - a.price);
+      else if (currentSort === 'name') filtered.sort((a,b) => a.title.localeCompare(b.title));
+
+      document.getElementById('results-count').textContent = filtered.length + ' produit' + (filtered.length !== 1 ? 's' : '');
+
+      const grid = document.getElementById('products-grid');
+      grid.innerHTML = filtered.map(p => `
+        <div class="product-card">
+          <a href="product.html?id=${p.id}" style="display:block;">
+            <img src="${p.image}" alt="${p.title}" class="product-image-placeholder">
+          </a>
+          ${p.badge ? `<span class="product-badge ${p.badge==='Nouveau'?'new':''}">${p.badge}</span>` : ''}
+          <button class="product-wish" onclick="showToast('❤️ Ajouté aux favoris')">♡</button>
+          <div class="product-body">
+            <div class="product-category">${catLabel(p.cat)}</div>
+            <div class="product-stars">${starStr(p.stars)} <span style="color:var(--text-light);font-size:0.75rem;">(${p.reviews})</span></div>
+            <a href="product.html?id=${p.id}"><div class="product-title">${p.title}</div></a>
+            <div class="product-desc">${p.desc}</div>
+            <div class="product-footer">
+              <div>
+                <span class="product-price">€${p.price.toFixed(2).replace('.',',')}</span>
+                ${p.oldPrice ? `<span class="product-price-old">€${p.oldPrice.toFixed(2).replace('.',',')}</span>` : ''}
+              </div>
+              <button class="add-cart-btn" onclick="addToCart({id:${p.id},title:'${p.title.replace(/'/g,"\\'")}',price:${p.price}})">+</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function catLabel(c) {
+      const map = { peau:'Soins de la peau', hygiene:'Hygiène', complements:'Compléments alimentaires', bienetre:'Bien-être', maternite:'Maternité' };
+      return map[c] || c;
+    }
+
+    document.getElementById('filter-bar').addEventListener('click', e => {
+      if (e.target.classList.contains('filter-chip')) {
+        document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        currentFilter = e.target.dataset.filter;
+        renderProducts();
+      }
+    });
+
+    document.getElementById('search-input').addEventListener('input', e => {
+      currentSearch = e.target.value;
+      renderProducts();
+    });
+
+    document.getElementById('sort-select').addEventListener('change', e => {
+      currentSort = e.target.value;
+      renderProducts();
+    });
+
+
+  </script>
+</body>
+</html>
