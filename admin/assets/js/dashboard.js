@@ -49,8 +49,12 @@ document.querySelectorAll(".nav-link").forEach((link) => {
 async function loadData() {
   try {
     const [pr, or] = await Promise.all([
-      fetch("https://raw.githubusercontent.com/location-vacances/paraorgine/main/assets/data/products.json").then((r) => r.json()),
-      fetch("https://raw.githubusercontent.com/location-vacances/paraorgine/main/assets/data/orders.json").then((r) => r.json()),
+      fetch(
+        "https://raw.githubusercontent.com/location-vacances/paraorgine/main/assets/data/products.json",
+      ).then((r) => r.json()),
+      fetch(
+        "https://raw.githubusercontent.com/location-vacances/paraorgine/main/assets/data/orders.json",
+      ).then((r) => r.json()),
     ]);
     products = pr;
     orders = or;
@@ -319,7 +323,7 @@ document
     let imagePath = fd.get("image");
     const file = fd.get("imageFile");
     if (file && file.name) {
-      const token = "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";
+      const token = process.env.GITHUB_TOKEN || "YOUR_GITHUB_TOKEN";
       try {
         imagePath = await uploadImageToGitHub(file, token);
       } catch (error) {
@@ -386,18 +390,34 @@ document.getElementById("confirmCancel").addEventListener("click", () => {
   pendingDeleteId = null;
   document.getElementById("confirmOverlay").classList.remove("open");
 });
-document.getElementById("confirmOk").addEventListener("click", () => {
+document.getElementById("confirmOk").addEventListener("click", async () => {
   if (pendingDeleteId !== null) {
     const p = products.find((p) => p.id === pendingDeleteId);
     products = products.filter((p) => p.id !== pendingDeleteId);
     saveProductsLocal();
     renderProducts();
     updateCounts();
-    toast(
-      "error",
-      "Produit supprimé",
-      `"${p?.title || "Produit"}" a été supprimé.`,
-    );
+    try {
+      if (p.image) {
+        await deleteImageFromGitHub(
+          p.image,
+          process.env.GITHUB_TOKEN || "YOUR_GITHUB_TOKEN",
+        );
+      }
+      await syncToGitHub();
+      toast(
+        "success",
+        "Produit supprimé",
+        `"${p?.title || "Produit"}" a été supprimé.`,
+      );
+    } catch (error) {
+      toast(
+        "error",
+        "Erreur suppression",
+        "Produit supprimé localement, mais erreur avec GitHub: " +
+          error.message,
+      );
+    }
     pendingDeleteId = null;
     document.getElementById("confirmOverlay").classList.remove("open");
   }
@@ -428,7 +448,7 @@ function saveOrdersLocal() {
 
 // ── GITHUB SYNC ──
 async function syncToGitHub() {
-  const token = "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";
+  const token = process.env.GITHUB_TOKEN || "YOUR_GITHUB_TOKEN";
   const repo = "location-vacances/paraorgine";
   toast("info", "Synchronisation…", "Envoi des données vers GitHub.");
   try {
@@ -500,7 +520,7 @@ async function updateFile(repo, path, content, sha, token, message) {
   if (!r.ok) throw new Error(`Échec de mise à jour : ${path}`);
 }
 async function uploadImageToGitHub(file, token) {
-  const repo = "location-vacances/Parapharmacie"; // Update with your actual repo: username/repo
+  const repo = "location-vacances/paraorgine"; // Update with your actual repo: username/repo
   const fileName = `p${Date.now()}.${file.name.split(".").pop()}`;
   const path = `assets/imgs/products/${fileName}`;
 
@@ -540,6 +560,28 @@ async function uploadImageToGitHub(file, token) {
     reader.onerror = () => reject(new Error("Failed to read file"));
     reader.readAsDataURL(file);
   });
+}
+async function deleteImageFromGitHub(path, token) {
+  const repo = "location-vacances/paraorgine";
+  const sha = await getFileSha(repo, path, token);
+  if (!sha) throw new Error("Image not found on GitHub");
+  const response = await fetch(
+    `https://api.github.com/repos/${repo}/contents/${path}`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `token ${token}`,
+        Accept: "application/vnd.github.v3+json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message: `Delete product image ${path.split("/").pop()}`,
+        sha,
+        branch: "main",
+      }),
+    },
+  );
+  if (!response.ok) throw new Error("Failed to delete image");
 }
 
 // ── EVENTS ──

@@ -3,7 +3,7 @@ let currentFilter = "all";
 let currentSearch = "";
 let currentSort = "default";
 
-const GITHUB_TOKEN = "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"; // Replace with your actual token
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN || "YOUR_GITHUB_TOKEN"; // Replace with your actual token
 const GITHUB_OWNER = "location-vacances";
 const GITHUB_REPO = "paraorgine";
 const ORDERS_FILE_PATH = "assets/data/orders.json";
