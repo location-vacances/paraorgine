@@ -4,7 +4,7 @@ let currentSearch = '';
 let currentSort = 'default';
 
 const GITHUB_TOKEN = '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'; // Replace with your actual token
-const GITHUB_OWNER = 'marouanbouchettoy';
+const GITHUB_OWNER = 'location-vacances';
 const GITHUB_REPO = 'Parapharmacie';
 const ORDERS_FILE_PATH = 'assets/data/orders.json';
 
