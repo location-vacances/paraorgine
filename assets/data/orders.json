@@ -4,7 +4,7 @@
     "items": [
       {
         "id": 1,
-        "title": "CrÃ¨me Hydratante Premium",
+        "title": "CrÃƒÂ¨me Hydratante Premium",
         "price": 15.99,
         "qty": 1
       }
@@ -19,7 +19,7 @@
     "items": [
       {
         "id": 1,
-        "title": "Crème Hydratante Premium",
+        "title": "CrÃ¨me Hydratante Premium",
         "price": 15.99,
         "qty": 1
       }
@@ -40,7 +40,7 @@
     "items": [
       {
         "id": 1,
-        "title": "Cr�me Hydratante Premium",
+        "title": "Crème Hydratante Premium",
         "price": 15.99,
         "qty": 2
       },
@@ -61,5 +61,26 @@
     "shipping": 0,
     "total": 105.48,
     "timestamp": "2026-05-05T11:32:54.138Z"
+  },
+  {
+    "id": 1777981128585,
+    "customer": {
+      "fullname": "Marouan Bouchettoy",
+      "phone": "0696554077",
+      "email": "uanemaro216@gmail.com",
+      "address": "Rue My Youssef Residence Raha 3eme Etage Appartemment Numro 27"
+    },
+    "items": [
+      {
+        "id": 1,
+        "title": "Cr�me Hydratante Premium",
+        "price": 15.99,
+        "qty": 1
+      }
+    ],
+    "subtotal": 15.99,
+    "shipping": 0,
+    "total": 15.99,
+    "timestamp": "2026-05-05T11:38:48.585Z"
   }
 ]
