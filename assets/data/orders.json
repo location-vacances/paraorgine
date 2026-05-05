@@ -4,7 +4,7 @@
     "items": [
       {
         "id": 1,
-        "title": "Crème Hydratante Premium",
+        "title": "CrÃ¨me Hydratante Premium",
         "price": 15.99,
         "qty": 1
       }
@@ -19,7 +19,7 @@
     "items": [
       {
         "id": 1,
-        "title": "Cr�me Hydratante Premium",
+        "title": "Crème Hydratante Premium",
         "price": 15.99,
         "qty": 1
       }
@@ -28,5 +28,38 @@
     "shipping": 4.9,
     "total": 20.89,
     "timestamp": "2026-05-05T11:29:45.887Z"
+  },
+  {
+    "id": 1777980774138,
+    "customer": {
+      "fullname": "hhh bbb",
+      "phone": "2222222",
+      "email": "uanemaro216@gmail.com",
+      "address": ",nnnn"
+    },
+    "items": [
+      {
+        "id": 1,
+        "title": "Cr�me Hydratante Premium",
+        "price": 15.99,
+        "qty": 2
+      },
+      {
+        "id": 2,
+        "title": "Shampooing Naturel Bio",
+        "price": 8.5,
+        "qty": 3
+      },
+      {
+        "id": 3,
+        "title": "Vitamine C 1000mg",
+        "price": 12,
+        "qty": 4
+      }
+    ],
+    "subtotal": 105.48,
+    "shipping": 0,
+    "total": 105.48,
+    "timestamp": "2026-05-05T11:32:54.138Z"
   }
 ]
