@@ -3,7 +3,7 @@ let currentFilter = "all";
 let currentSearch = "";
 let currentSort = "default";
 
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN || "YOUR_GITHUB_TOKEN"; // Replace with your actual token
+const TOKEN_GITHUB = process.env.TOKEN_GITHUB || "YOUR_TOKEN_GITHUB"; // Replace with your actual token
 const GITHUB_OWNER = "location-vacances";
 const GITHUB_REPO = "paraorgine";
 const ORDERS_FILE_PATH = "assets/data/orders.json";
@@ -163,7 +163,7 @@ async function checkout() {
       `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${ORDERS_FILE_PATH}`,
       {
         headers: {
-          Authorization: `token ${GITHUB_TOKEN}`,
+          Authorization: `token ${TOKEN_GITHUB}`,
           Accept: "application/vnd.github.v3+json",
         },
       },
@@ -181,7 +181,7 @@ async function checkout() {
       {
         method: "PUT",
         headers: {
-          Authorization: `token ${GITHUB_TOKEN}`,
+          Authorization: `token ${TOKEN_GITHUB}`,
           Accept: "application/vnd.github.v3+json",
           "Content-Type": "application/json",
         },

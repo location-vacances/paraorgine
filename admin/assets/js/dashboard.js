@@ -323,7 +323,7 @@ document
     let imagePath = fd.get("image");
     const file = fd.get("imageFile");
     if (file && file.name) {
-      const token = process.env.GITHUB_TOKEN || "YOUR_GITHUB_TOKEN";
+      const token = process.env.TOKEN_GITHUB || "YOUR_TOKEN_GITHUB";
       try {
         imagePath = await uploadImageToGitHub(file, token);
       } catch (error) {
@@ -401,7 +401,7 @@ document.getElementById("confirmOk").addEventListener("click", async () => {
       if (p.image) {
         await deleteImageFromGitHub(
           p.image,
-          process.env.GITHUB_TOKEN || "YOUR_GITHUB_TOKEN",
+          process.env.TOKEN_GITHUB || "YOUR_TOKEN_GITHUB",
         );
       }
       await syncToGitHub();
@@ -448,7 +448,7 @@ function saveOrdersLocal() {
 
 // ── GITHUB SYNC ──
 async function syncToGitHub() {
-  const token = process.env.GITHUB_TOKEN || "YOUR_GITHUB_TOKEN";
+  const token = process.env.TOKEN_GITHUB || "YOUR_TOKEN_GITHUB";
   const repo = "location-vacances/paraorgine";
   toast("info", "Synchronisation…", "Envoi des données vers GitHub.");
   try {
