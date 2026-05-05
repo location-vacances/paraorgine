@@ -216,5 +216,23 @@
       "20 sachets / boîte",
       "Certifié Agriculture Biologique"
     ]
+  },
+  {
+    "id": 1777989188431,
+    "title": "hi",
+    "cat": "peau",
+    "price": 11,
+    "oldPrice": 11,
+    "badge": "Promo",
+    "stars": 5,
+    "reviews": 0,
+    "image": "assets/imgs/products/p1777989188431.png",
+    "desc": "hhh",
+    "features": [
+      "jjjj",
+      "kk",
+      "kkk",
+      "kk"
+    ]
   }
 ]
