@@ -12,7 +12,8 @@
     "subtotal": 15.99,
     "shipping": 4.9,
     "total": 20.89,
-    "timestamp": "2026-05-05T11:18:38.622Z"
+    "timestamp": "2026-05-05T11:18:38.622Z",
+    "status": "pending"
   },
   {
     "id": 1777980585887,
