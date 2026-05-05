@@ -49,8 +49,8 @@ document.querySelectorAll(".nav-link").forEach((link) => {
 async function loadData() {
   try {
     const [pr, or] = await Promise.all([
-      fetch("../assets/data/products.json").then((r) => r.json()),
-      fetch("../assets/data/orders.json").then((r) => r.json()),
+      fetch("https://raw.githubusercontent.com/location-vacances/paraorgine/main/assets/data/products.json").then((r) => r.json()),
+      fetch("https://raw.githubusercontent.com/location-vacances/paraorgine/main/assets/data/orders.json").then((r) => r.json()),
     ]);
     products = pr;
     orders = or;
