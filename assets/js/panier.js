@@ -1,24 +1,27 @@
 let products = {};
-let currentFilter = 'all';
-let currentSearch = '';
-let currentSort = 'default';
+let currentFilter = "all";
+let currentSearch = "";
+let currentSort = "default";
 
-const GITHUB_TOKEN = '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'; // Replace with your actual token
-const GITHUB_OWNER = 'location-vacances';
-const GITHUB_REPO = 'Parapharmacie';
-const ORDERS_FILE_PATH = 'assets/data/orders.json';
+const GITHUB_TOKEN = "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"; // Replace with your actual token
+const GITHUB_OWNER = "location-vacances";
+const GITHUB_REPO = "Parapharmacie";
+const ORDERS_FILE_PATH = "assets/data/orders.json";
 
-fetch('assets/data/products.json')
-  .then(response => response.json())
-  .then(data => {
-    products = data.reduce((acc, p) => { acc[p.id] = p; return acc; }, {});
+fetch("assets/data/products.json")
+  .then((response) => response.json())
+  .then((data) => {
+    products = data.reduce((acc, p) => {
+      acc[p.id] = p;
+      return acc;
+    }, {});
     renderCart();
   })
-  .catch(error => console.error('Error loading products:', error));
+  .catch((error) => console.error("Error loading products:", error));
 
 function renderCart() {
   const cart = getCart();
-  const el = document.getElementById('cart-content');
+  const el = document.getElementById("cart-content");
 
   if (!cart.length) {
     el.innerHTML = `
@@ -31,32 +34,36 @@ function renderCart() {
     return;
   }
 
-  const subtotal = cart.reduce((s,i) => s + i.price * (i.qty||1), 0);
+  const subtotal = cart.reduce((s, i) => s + i.price * (i.qty || 1), 0);
   const shipping = 0; // Livraison gratuite pour toutes les commandes
   const total = subtotal + shipping;
 
-        el.innerHTML = `
+  el.innerHTML = `
           <div style="display:grid;grid-template-columns:1fr 320px;gap:2rem;align-items:start;">
             <div class="card">
               <div id="cart-items">
-                ${cart.map(item => `
+                ${cart
+                  .map(
+                    (item) => `
                   <div class="cart-row" id="row-${item.id}">
-                    <img src="${products[item.id]?.image || '📦'}" alt="${item.title}" class="cart-img">
+                    <img src="${products[item.id]?.image || "📦"}" alt="${item.title}" class="cart-img">
                     <div>
                       <div class="cart-product-name">${item.title}</div>
                       <div class="cart-product-cat">${formatPrice(item.price)} / unité</div>
                     </div>
                     <div class="qty-selector" style="transform:scale(0.9);">
                       <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
-                      <span class="qty-value">${item.qty||1}</span>
+                      <span class="qty-value">${item.qty || 1}</span>
                       <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
                     </div>
                     <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--plum);white-space:nowrap;">
-                      ${formatPrice(item.price * (item.qty||1))}
+                      ${formatPrice(item.price * (item.qty || 1))}
                     </div>
                     <button class="cart-remove" onclick="removeItem(${item.id})">✕</button>
                   </div>
-                `).join('')}
+                `,
+                  )
+                  .join("")}
               </div>
               <div style="display:flex;justify-content:space-between;align-items:center;padding-top:1rem;margin-top:0.5rem;">
                 <a href="boutique.html" class="btn btn-outline btn-sm">← Continuer les achats</a>
@@ -102,38 +109,41 @@ function renderCart() {
 
 function changeQty(id, delta) {
   const cart = getCart();
-  const idx = cart.findIndex(i => i.id === id);
+  const idx = cart.findIndex((i) => i.id === id);
   if (idx === -1) return;
-  cart[idx].qty = Math.max(1, (cart[idx].qty||1) + delta);
+  cart[idx].qty = Math.max(1, (cart[idx].qty || 1) + delta);
   saveCart(cart);
   renderCart();
 }
 
 function removeItem(id) {
-  const cart = getCart().filter(i => i.id !== id);
+  const cart = getCart().filter((i) => i.id !== id);
   saveCart(cart);
   renderCart();
-  showToast('Produit retiré du panier');
+  showToast("Produit retiré du panier");
 }
 
 function clearCart() {
-  if (confirm('Vider tout le panier ?')) { saveCart([]); renderCart(); }
+  if (confirm("Vider tout le panier ?")) {
+    saveCart([]);
+    renderCart();
+  }
 }
 
 async function checkout() {
-  const form = document.getElementById('order-form');
+  const form = document.getElementById("order-form");
   if (!form.checkValidity()) {
     form.reportValidity();
     return;
   }
 
-  const fullname = document.getElementById('fullname').value.trim();
-  const phone = document.getElementById('phone').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const address = document.getElementById('address').value.trim();
+  const fullname = document.getElementById("fullname").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const address = document.getElementById("address").value.trim();
 
   const cart = getCart();
-  const subtotal = cart.reduce((s,i) => s + i.price * (i.qty||1), 0);
+  const subtotal = cart.reduce((s, i) => s + i.price * (i.qty || 1), 0);
   const shipping = 0; // Livraison gratuite pour toutes les commandes
   const total = subtotal + shipping;
 
@@ -144,18 +154,21 @@ async function checkout() {
     subtotal,
     shipping,
     total,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   };
 
   try {
     // Get current orders content and SHA
-    const getResponse = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${ORDERS_FILE_PATH}`, {
-      headers: {
-        'Authorization': `token ${GITHUB_TOKEN}`,
-        'Accept': 'application/vnd.github.v3+json'
-      }
-    });
-    if (!getResponse.ok) throw new Error('Failed to fetch current orders file');
+    const getResponse = await fetch(
+      `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${ORDERS_FILE_PATH}`,
+      {
+        headers: {
+          Authorization: `token ${GITHUB_TOKEN}`,
+          Accept: "application/vnd.github.v3+json",
+        },
+      },
+    );
+    if (!getResponse.ok) throw new Error("Failed to fetch current orders file");
 
     const fileData = await getResponse.json();
     const currentContent = JSON.parse(atob(fileData.content));
@@ -163,27 +176,30 @@ async function checkout() {
     const newContent = JSON.stringify(currentContent, null, 2);
 
     // Update file
-    const updateResponse = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${ORDERS_FILE_PATH}`, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `token ${GITHUB_TOKEN}`,
-        'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json'
+    const updateResponse = await fetch(
+      `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${ORDERS_FILE_PATH}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `token ${GITHUB_TOKEN}`,
+          Accept: "application/vnd.github.v3+json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: "Add new order",
+          content: btoa(newContent),
+          sha: fileData.sha,
+        }),
       },
-      body: JSON.stringify({
-        message: 'Add new order',
-        content: btoa(newContent),
-        sha: fileData.sha
-      })
-    });
-    if (!updateResponse.ok) throw new Error('Failed to update orders file');
+    );
+    if (!updateResponse.ok) throw new Error("Failed to update orders file");
 
-    console.log('Order saved to GitHub');
-    showToast('✅ Commande envoyée ! Merci pour votre achat.', 'success');
+    console.log("Order saved to GitHub");
+    showToast("✅ Commande envoyée ! Merci pour votre achat.", "success");
     saveCart([]);
     setTimeout(() => renderCart(), 1000);
   } catch (error) {
-    console.error('Error saving order to GitHub:', error);
-    showToast('❌ Erreur lors de la commande. Veuillez réessayer.');
+    console.error("Error saving order to GitHub:", error);
+    showToast("❌ Erreur lors de la commande. Veuillez réessayer.");
   }
 }
