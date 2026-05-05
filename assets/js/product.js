@@ -43,11 +43,11 @@ fetch('assets/data/products.json')
           ${p.badge ? `<span class="product-badge ${p.badge==='Nouveau'?'new':''}" style="position:static;display:inline-block;margin-bottom:0.8rem;">${p.badge}</span>` : ''}
           <h1>${p.title}</h1>
           <div class="product-stars">${starStr(p.stars)} <span style="color:var(--text-light);font-size:0.85rem;">${p.reviews} avis</span></div>
-          <div style="display:flex;align-items:baseline;gap:12px;margin:0.8rem 0 1.2rem;">
-            <span class="product-price" style="font-size:2.2rem;">€${p.price.toFixed(2).replace('.',',')}</span>
-            ${p.oldPrice ? `<span class="product-price-old" style="font-size:1.1rem;">€${p.oldPrice.toFixed(2).replace('.',',')}</span>
-            <span style="background:var(--rose-light);color:var(--rose);font-size:0.75rem;font-weight:600;padding:3px 8px;border-radius:100px;">-${Math.round(100-(p.price/p.oldPrice*100))}%</span>` : ''}
-          </div>
+        <div style="display:flex;align-items:baseline;gap:12px;margin:0.8rem 0 1.2rem;">
+          <span class="product-price" style="font-size:2.2rem;">${formatPrice(p.price)}</span>
+          ${p.oldPrice ? `<span class="product-price-old" style="font-size:1.1rem;">${formatPrice(p.oldPrice)}</span>
+          <span style="background:var(--rose-light);color:var(--rose);font-size:0.75rem;font-weight:600;padding:3px 8px;border-radius:100px;">-${Math.round(100-(p.price/p.oldPrice*100))}%</span>` : ''}
+        </div>
           <p>${p.desc}</p>
           <div class="qty-selector" id="qty-wrap">
             <button class="qty-btn" id="qty-minus">−</button>
@@ -84,10 +84,10 @@ fetch('assets/data/products.json')
           <div class="product-stars">${starStr(r.stars)}</div>
           <a href="product.html?id=${r.id}"><div class="product-title">${r.title}</div></a>
           <div class="product-desc">${r.desc}</div>
-          <div class="product-footer">
-            <span class="product-price">€${r.price.toFixed(2).replace('.',',')}</span>
-            <button class="add-cart-btn" onclick="addToCart({id:${r.id},title:'${r.title.replace(/'/g,"\\'")}',price:${r.price}})">+</button>
-          </div>
+        <div class="product-footer">
+          <span class="product-price">${formatPrice(r.price)}</span>
+          <button class="add-cart-btn" onclick="addToCart({id:${r.id},title:'${r.title.replace(/'/g,"\\'")}',price:${r.price}})">+</button>
+        </div>
         </div>
       </div>`).join('');
   })

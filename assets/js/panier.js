@@ -44,7 +44,7 @@ function renderCart() {
                     <img src="${products[item.id]?.image || '📦'}" alt="${item.title}" class="cart-img">
                     <div>
                       <div class="cart-product-name">${item.title}</div>
-                      <div class="cart-product-cat">€${item.price.toFixed(2).replace('.',',')} / unité</div>
+                      <div class="cart-product-cat">${formatPrice(item.price)} / unité</div>
                     </div>
                     <div class="qty-selector" style="transform:scale(0.9);">
                       <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
@@ -52,7 +52,7 @@ function renderCart() {
                       <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
                     </div>
                     <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--plum);white-space:nowrap;">
-                      €${(item.price * (item.qty||1)).toFixed(2).replace('.',',')}
+                      ${formatPrice(item.price * (item.qty||1))}
                     </div>
                     <button class="cart-remove" onclick="removeItem(${item.id})">✕</button>
                   </div>
@@ -84,15 +84,15 @@ function renderCart() {
                 </div>
               </form>
               <h3 style="color:var(--plum);margin-bottom:1.2rem;">Récapitulatif</h3>
-              <div class="summary-line"><span>Sous-total</span><span>€${subtotal.toFixed(2).replace('.',',')}</span></div>
-              <div class="summary-line">
-                <span>Livraison</span>
-                <span><span style="color:#1a5c3a;font-weight:600;">Gratuite ✓</span></span>
-              </div>
-              <div class="summary-total"><span>Total</span><span>€${total.toFixed(2).replace('.',',')}</span></div>
-              <button class="btn btn-primary" style="width:100%;margin-top:1.2rem;justify-content:center;" onclick="checkout()">
-                🔒 Commander (€${total.toFixed(2).replace('.',',')})
-              </button>
+            <div class="summary-line"><span>Sous-total</span><span>${formatPrice(subtotal)}</span></div>
+            <div class="summary-line">
+              <span>Livraison</span>
+              <span><span style="color:#1a5c3a;font-weight:600;">Gratuite ✓</span></span>
+            </div>
+            <div class="summary-total"><span>Total</span><span>${formatPrice(total)}</span></div>
+            <button class="btn btn-primary" style="width:100%;margin-top:1.2rem;justify-content:center;" onclick="checkout()">
+              🔒 Commander (${formatPrice(total)})
+            </button>
               <div style="text-align:center;margin-top:0.8rem;">
                 <span style="font-size:0.75rem;color:var(--text-light);">💳 CB · Visa · PayPal · Virement</span>
               </div>

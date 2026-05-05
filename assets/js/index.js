@@ -26,8 +26,8 @@ function renderFeaturedProducts() {
         <div class="product-desc">${p.desc.split('. ')[0]}.</div>
         <div class="product-footer">
           <div>
-            <span class="product-price">€${p.price.toFixed(2).replace('.',',')}</span>
-            ${p.oldPrice ? `<span class="product-price-old">€${p.oldPrice.toFixed(2).replace('.',',')}</span>` : ''}
+            <span class="product-price">${formatPrice(p.price)}</span>
+            ${p.oldPrice ? `<span class="product-price-old">${formatPrice(p.oldPrice)}</span>` : ''}
           </div>
           <button class="add-cart-btn" onclick="addToCart({id:${p.id},title:'${p.title.replace(/'/g,"\\'")}',price:${p.price}})">+</button>
         </div>

@@ -1,7 +1,37 @@
+let currentCurrency = 'MAD';
+let currencySymbol = 'MAD';
+let exchangeRate = 1; // MAD as base
+
+async function setCurrency() {
+  try {
+    const response = await fetch('https://ipapi.co/json/');
+    const data = await response.json();
+    const country = data.country_name;
+    if (country === 'Morocco') {
+      currentCurrency = 'MAD';
+      currencySymbol = 'MAD';
+      exchangeRate = 1;
+    } else {
+      currentCurrency = 'EUR';
+      currencySymbol = '€';
+      exchangeRate = 0.1; // Approximate 1 MAD = 0.1 EUR
+    }
+  } catch (error) {
+    // Default to MAD
+    console.log('Error detecting location:', error);
+  }
+}
+
+function formatPrice(price) {
+  const converted = price * exchangeRate;
+  return currencySymbol + converted.toFixed(2).replace('.', ',');
+}
+
 $(document).ready(function(){
   $('#header').load('assets/inc/header.html');
   $('#sidebar').load('assets/inc/sidebar.html');
   $('#footer').load('assets/inc/footer.html');
+  setCurrency();
 });
 
 // ── Cart Utilities ──
